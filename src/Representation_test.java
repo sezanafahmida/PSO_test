@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -42,7 +42,8 @@ public class Representation_test {
 	public void input(){
 		Scanner scn = null;
 		try {
-			scn = new Scanner(new BufferedReader(new FileReader("E:/New folder/PSO_test/src/test_input.txt")));
+			String currentDirectory = new File("").getAbsolutePath();
+			scn = new Scanner(new BufferedReader(new FileReader(currentDirectory+"\\src\\test_input.txt")));		
 			 for(int i = 0; i < k+1; i++){
 				
 			     for(int j = 0; j < k+1; j++){
