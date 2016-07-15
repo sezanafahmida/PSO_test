@@ -18,11 +18,18 @@ public class Representation_test {
 	}
 	public void init(){
 		double random;
+		
 		for(int i=0;i<n*k;i++){
 			random= Math.random();
 			if(random<0.5) rprsntn[i]=0;
 			else rprsntn[i]=1;
+			
 		}
+		constraint_check();
+		//if(adjust!=0){
+			
+		//}
+		
 		for(int i=0;i<n*k;i++){
 			System.out.print(i+1);
 		}
@@ -85,6 +92,29 @@ public class Representation_test {
 			//return best/cost as fitness ? 
 			//how to determine best_so_far
 			//How to ensure the constraints
+		
+	}
+	public void constraint_check()
+	{
+		int count[]=new int[n];
+	    
+		for(int i=0;i<k;i++){
+			for(int j=0;j<n;j++){
+				count[j]+=rprsntn[j+i*n];
+			
+			}
+		}
+		for(int j=0;j<n;j++){
+			if((count[j])<1){
+				if(rprsntn[j]==0) rprsntn[j]=1;
+				else rprsntn[j+k]=1;
+			}
+			else if(count[j]>1){
+				if(rprsntn[j]==1) rprsntn[j]=0;
+				else rprsntn[j+k]=1;
+			}
+		}
+			
 		
 	}
 
