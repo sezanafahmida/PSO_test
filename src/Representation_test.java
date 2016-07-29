@@ -1,30 +1,121 @@
-import java.util.Random;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 
 public class Representation_test {
-	int rprsntn[];
+	byte rprsntn[][];
 	int n; //number of collection points
 	int k; //number of vehicles
-	public Representation_test(int n,int k){
-		rprsntn=new int [n*k];
+	double adj_mat[][];
+	public Representation_test(int k,int n){
+		rprsntn=new byte [k][n];
+		adj_mat= new double[n+1][n+1];
 		this.n=n;
 		this.k=k;
 	}
 	public void init(){
 		double random;
-		for(int i=0;i<n*k;i++){
+		
+		for(int i=0;i<k;i++){
+			for(int j=0;j<n;j++){
 			random= Math.random();
-			if(random<0.5) rprsntn[i]=0;
-			else rprsntn[i]=1;
+			if(random<0.5) rprsntn[i][j]=0;
+			else rprsntn[i][j]=1;}
+			
 		}
-		for(int i=0;i<n*k;i++){
-			System.out.print(i+1);
-		}
-		System.out.println();
-		for(int i=0;i<n*k;i++){
-			System.out.print(rprsntn[i]);
-		}
+		//constraint_check();
+		//if(adjust!=0){
+			
+		//}
+		
+		for(int i=0;i<k;i++){
+			for(int j=0;j<n;j++){
+			System.out.print(rprsntn[i][j]);}
+		
+		System.out.println();}
 		
 	}
+	public void input(){
+		Scanner scn = null;
+		try {
+			String currentDirectory = new File("").getAbsolutePath();
+			scn = new Scanner(new BufferedReader(new FileReader(currentDirectory+"\\src\\test_input.txt")));		
+			 for(int i = 0; i < n+1; i++){
+				
+			     for(int j = 0; j < n+1; j++){
+			         adj_mat[i][j] = scn.nextFloat(); 
+			        // System.out.print(adj_mat[i][j]);
+			       //System.out.print(" ");
+			     }
+			     
+			   // System.out.println();
+			  
+			     }
+				
+		
+		
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		 
+	}
+	public void fitness_asses(){
+		double best=999999;
+		double cost=0;int cust=0,veh=0;
+		int start=0;
+			for(int i=0;i<k;i++){
+				for(int j=0;j<n;j++){
+				if(rprsntn[i][j]==1)
+				{
+										
+					System.out.print("cust:"+j);
+					System.out.print(" ");
+					System.out.print("veh:"+i);
+				
+					System.out.print(" ");
+					
+					cost+=adj_mat[i][j];
+					start=j;
+					
+					
+				}
+			}
+		}
+			cost+=adj_mat[start][0];
+			if(cost<best) best=cost;
+			System.out.println(cost);
+			//return best/cost as fitness ? 
+			//how to determine best_so_far
+			//How to ensure the constraints
+		
+	}
+/*	public void constraint_check()
+	{
+		byte count[]=new int[n];
+	    count=rprsntn[0].;
+		for(int i=1;i<n;i++){
+			count=count rprsntn[i];
+			
+			
+			}
+		}
+		for(int j=0;j<n;j++){
+			if((count[j])<1){
+				if(rprsntn[j]==0) rprsntn[j]=1;
+				else rprsntn[j+k]=1;
+			}
+			else if(count[j]>1){
+				if(rprsntn[j]==1) rprsntn[j]=0;
+				else rprsntn[j+k]=1;
+			}
+		}
+			
+		
+	}*/
 
 }
