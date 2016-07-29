@@ -18,14 +18,22 @@ public class Representation_test {
 	}
 	public void init(){
 		double random;
-		
+		int position[]= new int[n];
+		int count_pos=0;
+		while(count_pos!=n){
 		for(int i=0;i<k;i++){
 			for(int j=0;j<n;j++){
 			random= Math.random();
-			if(random<0.5) rprsntn[i][j]=0;
-			else rprsntn[i][j]=1;}
+			if(random<0.5) {}
+			else if (position[j]==0){
+				rprsntn[i][j]=1;
+				position[j]=1;
+				count_pos++;
+				System.out.println("count:"+count_pos);}
+			}
 			
 		}
+	}
 		//constraint_check();
 		//if(adjust!=0){
 			
